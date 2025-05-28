@@ -1,3 +1,5 @@
 /target
 .idea/
-benchmark.db*
+single_table.db*
+mapping_and_data_tables.db*
+fts_5_table.db*

@@ -1,0 +1,1735 @@
++ BATCH_SIZES=('1000' '10000')
++ declare -a BATCH_SIZES
++ UNIQUE_TAG_VALUES=('10000' '20000')
++ declare -a UNIQUE_TAG_VALUES
++ TYPE_SCHEMAS=('single-table' 'mapping-and-data-tables' 'fts5-table')
++ declare -a TYPE_SCHEMAS
++ SYNCHRONOUS_FLAGS=('normal' 'off')
++ declare -a SYNCHRONOUS_FLAGS
++ JOURNAL_MODES=('wal' 'off')
++ declare -a JOURNAL_MODES
++ cargo build --release
+   Compiling simple-sqlite-bench-rs v0.1.0 (/home/user/github/REASY/simple-sqlite-bench-rs)
+    Finished `release` profile [optimized] target(s) in 0.72s
++ for batch_size in "${BATCH_SIZES[@]}"
++ for unique_tag_value in "${UNIQUE_TAG_VALUES[@]}"
++ for type_schema in "${TYPE_SCHEMAS[@]}"
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag normal --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 10000
+The type of schema: SingleTable
+Synchronous flag: Normal
+Journal mode: Wal
+Total time: 346.48s
+File size (MiB): 995.32
+Average write throughput: 28861.65 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag normal --journal-mode wal --count 10"
+	User time (seconds): 23.38
+	System time (seconds): 85.21
+	Percent of CPU this job got: 31%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 5:46.49
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 11048
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 90827
+	Voluntary context switches: 1829594
+	Involuntary context switches: 3861
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 343925808
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag normal --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 10000
+The type of schema: SingleTable
+Synchronous flag: Normal
+Journal mode: Off
+Total time: 132.69s
+File size (MiB): 995.64
+Average write throughput: 75362.21 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag normal --journal-mode off --count 10"
+	User time (seconds): 11.88
+	System time (seconds): 31.58
+	Percent of CPU this job got: 32%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:12.78
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 10136
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 57975
+	Voluntary context switches: 2714516
+	Involuntary context switches: 1662
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 115068360
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag off --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 10000
+The type of schema: SingleTable
+Synchronous flag: Off
+Journal mode: Wal
+Total time: 71.36s
+File size (MiB): 995.35
+Average write throughput: 140144.09 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag off --journal-mode wal --count 10"
+	User time (seconds): 18.16
+	System time (seconds): 53.04
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:11.44
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 9984
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 58006
+	Voluntary context switches: 90270
+	Involuntary context switches: 1194
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 115998520
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag off --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 10000
+The type of schema: SingleTable
+Synchronous flag: Off
+Journal mode: Off
+Total time: 23.81s
+File size (MiB): 995.36
+Average write throughput: 420036.20 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag off --journal-mode off --count 10"
+	User time (seconds): 9.70
+	System time (seconds): 14.13
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:23.88
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 9368
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 10645
+	Voluntary context switches: 90232
+	Involuntary context switches: 539
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 2048296
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for type_schema in "${TYPE_SCHEMAS[@]}"
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 10000
+The type of schema: MappingAndDataTables
+Synchronous flag: Normal
+Journal mode: Wal
+Total time: 254.75s
+File size (MiB): 292.54
+Average write throughput: 39253.96 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode wal --count 10"
+	User time (seconds): 23.37
+	System time (seconds): 51.96
+	Percent of CPU this job got: 29%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 4:14.83
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 10896
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 117873
+	Voluntary context switches: 1001267
+	Involuntary context switches: 2695
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 214958440
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 10000
+The type of schema: MappingAndDataTables
+Synchronous flag: Normal
+Journal mode: Off
+Total time: 117.93s
+File size (MiB): 292.55
+Average write throughput: 84796.80 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode off --count 10"
+	User time (seconds): 16.16
+	System time (seconds): 20.54
+	Percent of CPU this job got: 31%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:57.97
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 10584
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 135345
+	Voluntary context switches: 1767519
+	Involuntary context switches: 1437
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 71681608
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 10000
+The type of schema: MappingAndDataTables
+Synchronous flag: Off
+Journal mode: Wal
+Total time: 45.76s
+File size (MiB): 292.54
+Average write throughput: 218519.27 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode wal --count 10"
+	User time (seconds): 16.70
+	System time (seconds): 29.04
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:45.80
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 10284
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 136356
+	Voluntary context switches: 160371
+	Involuntary context switches: 819
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 72086744
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 10000
+The type of schema: MappingAndDataTables
+Synchronous flag: Off
+Journal mode: Off
+Total time: 21.80s
+File size (MiB): 292.54
+Average write throughput: 458750.11 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode off --count 10"
+	User time (seconds): 12.78
+	System time (seconds): 9.05
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:21.82
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 11184
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 135212
+	Voluntary context switches: 160229
+	Involuntary context switches: 391
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 599120
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for type_schema in "${TYPE_SCHEMAS[@]}"
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag normal --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 10000
+The type of schema: Fts5Table
+Synchronous flag: Normal
+Journal mode: Wal
+Total time: 58.46s
+File size (MiB): 1076.31
+Average write throughput: 171046.89 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag normal --journal-mode wal --count 10"
+	User time (seconds): 37.48
+	System time (seconds): 3.54
+	Percent of CPU this job got: 70%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:58.51
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 12012
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 141596
+	Voluntary context switches: 156655
+	Involuntary context switches: 1039
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 18064456
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag normal --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 10000
+The type of schema: Fts5Table
+Synchronous flag: Normal
+Journal mode: Off
+Total time: 109.99s
+File size (MiB): 1077.95
+Average write throughput: 90917.51 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag normal --journal-mode off --count 10"
+	User time (seconds): 38.97
+	System time (seconds): 2.17
+	Percent of CPU this job got: 37%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:50.07
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 12316
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 141574
+	Voluntary context switches: 226310
+	Involuntary context switches: 1323
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 9631184
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag off --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 10000
+The type of schema: Fts5Table
+Synchronous flag: Off
+Journal mode: Wal
+Total time: 39.57s
+File size (MiB): 1076.05
+Average write throughput: 252739.21 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag off --journal-mode wal --count 10"
+	User time (seconds): 37.05
+	System time (seconds): 2.61
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:39.66
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 11108
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 141631
+	Voluntary context switches: 90227
+	Involuntary context switches: 711
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 2244184
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag off --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 10000
+The type of schema: Fts5Table
+Synchronous flag: Off
+Journal mode: Off
+Total time: 37.50s
+File size (MiB): 1077.70
+Average write throughput: 266694.04 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag off --journal-mode off --count 10"
+	User time (seconds): 36.31
+	System time (seconds): 1.28
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:37.57
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 11852
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 141574
+	Voluntary context switches: 90214
+	Involuntary context switches: 511
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 2308056
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for unique_tag_value in "${UNIQUE_TAG_VALUES[@]}"
++ for type_schema in "${TYPE_SCHEMAS[@]}"
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag normal --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 20000
+The type of schema: SingleTable
+Synchronous flag: Normal
+Journal mode: Wal
+Total time: 347.27s
+File size (MiB): 992.44
+Average write throughput: 28795.79 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag normal --journal-mode wal --count 10"
+	User time (seconds): 23.79
+	System time (seconds): 86.64
+	Percent of CPU this job got: 31%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 5:47.36
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 12040
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 115537
+	Voluntary context switches: 1498757
+	Involuntary context switches: 3813
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 335792976
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag normal --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 20000
+The type of schema: SingleTable
+Synchronous flag: Normal
+Journal mode: Off
+Total time: 131.76s
+File size (MiB): 992.37
+Average write throughput: 75895.19 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag normal --journal-mode off --count 10"
+	User time (seconds): 11.50
+	System time (seconds): 32.57
+	Percent of CPU this job got: 33%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:11.84
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 11472
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 61487
+	Voluntary context switches: 2696929
+	Involuntary context switches: 1333
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 112424888
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag off --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 20000
+The type of schema: SingleTable
+Synchronous flag: Off
+Journal mode: Wal
+Total time: 69.88s
+File size (MiB): 992.34
+Average write throughput: 143098.47 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag off --journal-mode wal --count 10"
+	User time (seconds): 17.80
+	System time (seconds): 51.95
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:09.97
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 11188
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 106719
+	Voluntary context switches: 90344
+	Involuntary context switches: 999
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 114132168
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag off --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 20000
+The type of schema: SingleTable
+Synchronous flag: Off
+Journal mode: Off
+Total time: 23.32s
+File size (MiB): 992.27
+Average write throughput: 428771.83 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag off --journal-mode off --count 10"
+	User time (seconds): 9.35
+	System time (seconds): 14.03
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:23.40
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 11036
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 61477
+	Voluntary context switches: 90232
+	Involuntary context switches: 348
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 2073520
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for type_schema in "${TYPE_SCHEMAS[@]}"
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 20000
+The type of schema: MappingAndDataTables
+Synchronous flag: Normal
+Journal mode: Wal
+Total time: 186.06s
+File size (MiB): 293.11
+Average write throughput: 53747.39 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode wal --count 10"
+	User time (seconds): 20.23
+	System time (seconds): 37.71
+	Percent of CPU this job got: 31%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:06.14
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 11900
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 132745
+	Voluntary context switches: 941008
+	Involuntary context switches: 2175
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 162152912
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 20000
+The type of schema: MappingAndDataTables
+Synchronous flag: Normal
+Journal mode: Off
+Total time: 110.86s
+File size (MiB): 293.10
+Average write throughput: 90203.50 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode off --count 10"
+	User time (seconds): 16.94
+	System time (seconds): 16.28
+	Percent of CPU this job got: 29%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:50.91
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 12216
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 109604
+	Voluntary context switches: 1324409
+	Involuntary context switches: 1539
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 54163984
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 20000
+The type of schema: MappingAndDataTables
+Synchronous flag: Off
+Journal mode: Wal
+Total time: 38.37s
+File size (MiB): 293.10
+Average write throughput: 260612.07 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode wal --count 10"
+	User time (seconds): 15.89
+	System time (seconds): 22.36
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:38.41
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 11756
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 133718
+	Voluntary context switches: 160379
+	Involuntary context switches: 713
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 54503392
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 20000
+The type of schema: MappingAndDataTables
+Synchronous flag: Off
+Journal mode: Off
+Total time: 20.03s
+File size (MiB): 293.10
+Average write throughput: 499308.00 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode off --count 10"
+	User time (seconds): 12.74
+	System time (seconds): 7.30
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:20.05
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 11504
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 87331
+	Voluntary context switches: 160254
+	Involuntary context switches: 240
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 600272
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for type_schema in "${TYPE_SCHEMAS[@]}"
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag normal --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 20000
+The type of schema: Fts5Table
+Synchronous flag: Normal
+Journal mode: Wal
+Total time: 61.23s
+File size (MiB): 1106.43
+Average write throughput: 163331.19 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag normal --journal-mode wal --count 10"
+	User time (seconds): 38.73
+	System time (seconds): 3.73
+	Percent of CPU this job got: 69%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:01.28
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 13000
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 161051
+	Voluntary context switches: 160273
+	Involuntary context switches: 957
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 19091208
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag normal --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 20000
+The type of schema: Fts5Table
+Synchronous flag: Normal
+Journal mode: Off
+Total time: 111.29s
+File size (MiB): 1107.38
+Average write throughput: 89852.41 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag normal --journal-mode off --count 10"
+	User time (seconds): 39.99
+	System time (seconds): 2.25
+	Percent of CPU this job got: 37%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:51.37
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 12888
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 137125
+	Voluntary context switches: 232558
+	Involuntary context switches: 1265
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 10214968
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag off --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 20000
+The type of schema: Fts5Table
+Synchronous flag: Off
+Journal mode: Wal
+Total time: 40.79s
+File size (MiB): 1107.27
+Average write throughput: 245159.83 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag off --journal-mode wal --count 10"
+	User time (seconds): 38.09
+	System time (seconds): 2.80
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:40.88
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 12192
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 140497
+	Voluntary context switches: 90218
+	Involuntary context switches: 611
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 2297928
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag off --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 1000
+Unique tag values: 20000
+The type of schema: Fts5Table
+Synchronous flag: Off
+Journal mode: Off
+Total time: 39.14s
+File size (MiB): 1105.91
+Average write throughput: 255466.26 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 1000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag off --journal-mode off --count 10"
+	User time (seconds): 37.74
+	System time (seconds): 1.38
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:39.22
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 12252
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 138135
+	Voluntary context switches: 90262
+	Involuntary context switches: 510
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 2398776
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for batch_size in "${BATCH_SIZES[@]}"
++ for unique_tag_value in "${UNIQUE_TAG_VALUES[@]}"
++ for type_schema in "${TYPE_SCHEMAS[@]}"
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag normal --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 10000
+The type of schema: SingleTable
+Synchronous flag: Normal
+Journal mode: Wal
+Total time: 171.18s
+File size (MiB): 995.43
+Average write throughput: 58417.15 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag normal --journal-mode wal --count 10"
+	User time (seconds): 19.05
+	System time (seconds): 77.54
+	Percent of CPU this job got: 56%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:51.27
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 15028
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4737
+	Voluntary context switches: 379281
+	Involuntary context switches: 4188
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 314107312
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag normal --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 10000
+The type of schema: SingleTable
+Synchronous flag: Normal
+Journal mode: Off
+Total time: 68.12s
+File size (MiB): 995.40
+Average write throughput: 146807.83 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag normal --journal-mode off --count 10"
+	User time (seconds): 10.53
+	System time (seconds): 24.77
+	Percent of CPU this job got: 51%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:08.20
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 15468
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4524
+	Voluntary context switches: 249673
+	Involuntary context switches: 1540
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 105076024
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag off --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 10000
+The type of schema: SingleTable
+Synchronous flag: Off
+Journal mode: Wal
+Total time: 79.23s
+File size (MiB): 995.02
+Average write throughput: 126210.24 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag off --journal-mode wal --count 10"
+	User time (seconds): 17.77
+	System time (seconds): 61.48
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:19.32
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 15528
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4650
+	Voluntary context switches: 9344
+	Involuntary context switches: 2061
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 106504072
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag off --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 10000
+The type of schema: SingleTable
+Synchronous flag: Off
+Journal mode: Off
+Total time: 24.27s
+File size (MiB): 995.39
+Average write throughput: 412007.82 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema single-table --synchronous-flag off --journal-mode off --count 10"
+	User time (seconds): 10.29
+	System time (seconds): 13.92
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:24.34
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 15384
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4530
+	Voluntary context switches: 9295
+	Involuntary context switches: 330
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 2345128
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for type_schema in "${TYPE_SCHEMAS[@]}"
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 10000
+The type of schema: MappingAndDataTables
+Synchronous flag: Normal
+Journal mode: Wal
+Total time: 122.50s
+File size (MiB): 292.55
+Average write throughput: 81632.54 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode wal --count 10"
+	User time (seconds): 18.20
+	System time (seconds): 48.51
+	Percent of CPU this job got: 54%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:02.58
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 15976
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3399
+	Voluntary context switches: 341483
+	Involuntary context switches: 2500
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 214982440
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 10000
+The type of schema: MappingAndDataTables
+Synchronous flag: Normal
+Journal mode: Off
+Total time: 55.26s
+File size (MiB): 292.55
+Average write throughput: 180956.20 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode off --count 10"
+	User time (seconds): 13.33
+	System time (seconds): 17.44
+	Percent of CPU this job got: 55%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:55.30
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 14884
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3270
+	Voluntary context switches: 275496
+	Involuntary context switches: 1285
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 72391896
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 10000
+The type of schema: MappingAndDataTables
+Synchronous flag: Off
+Journal mode: Wal
+Total time: 54.11s
+File size (MiB): 292.53
+Average write throughput: 184818.32 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode wal --count 10"
+	User time (seconds): 17.45
+	System time (seconds): 36.63
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:54.15
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 16392
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3360
+	Voluntary context switches: 16953
+	Involuntary context switches: 1604
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 72813032
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 10000
+The type of schema: MappingAndDataTables
+Synchronous flag: Off
+Journal mode: Off
+Total time: 22.45s
+File size (MiB): 292.54
+Average write throughput: 445454.66 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode off --count 10"
+	User time (seconds): 12.98
+	System time (seconds): 9.49
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:22.47
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 15628
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3270
+	Voluntary context switches: 16717
+	Involuntary context switches: 375
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 1615312
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for type_schema in "${TYPE_SCHEMAS[@]}"
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag normal --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 10000
+The type of schema: Fts5Table
+Synchronous flag: Normal
+Journal mode: Wal
+Total time: 48.59s
+File size (MiB): 1077.44
+Average write throughput: 205811.06 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag normal --journal-mode wal --count 10"
+	User time (seconds): 35.77
+	System time (seconds): 3.76
+	Percent of CPU this job got: 81%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:48.64
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 20796
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4509
+	Voluntary context switches: 52867
+	Involuntary context switches: 967
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 16632352
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag normal --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 10000
+The type of schema: Fts5Table
+Synchronous flag: Normal
+Journal mode: Off
+Total time: 45.26s
+File size (MiB): 1078.05
+Average write throughput: 220950.56 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag normal --journal-mode off --count 10"
+	User time (seconds): 35.11
+	System time (seconds): 1.55
+	Percent of CPU this job got: 80%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:45.34
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 20308
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4457
+	Voluntary context switches: 55626
+	Involuntary context switches: 745
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 7156160
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag off --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 10000
+The type of schema: Fts5Table
+Synchronous flag: Off
+Journal mode: Wal
+Total time: 38.62s
+File size (MiB): 1078.02
+Average write throughput: 258948.23 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag off --journal-mode wal --count 10"
+	User time (seconds): 35.42
+	System time (seconds): 3.19
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:38.71
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 19992
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4530
+	Voluntary context switches: 9230
+	Involuntary context switches: 677
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 5013240
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag off --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 10000
+The type of schema: Fts5Table
+Synchronous flag: Off
+Journal mode: Off
+Total time: 36.03s
+File size (MiB): 1077.51
+Average write throughput: 277570.96 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 10000 --type-schema fts5-table --synchronous-flag off --journal-mode off --count 10"
+	User time (seconds): 34.82
+	System time (seconds): 1.24
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:36.10
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 19840
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4464
+	Voluntary context switches: 9214
+	Involuntary context switches: 602
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 2255920
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for unique_tag_value in "${UNIQUE_TAG_VALUES[@]}"
++ for type_schema in "${TYPE_SCHEMAS[@]}"
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag normal --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 20000
+The type of schema: SingleTable
+Synchronous flag: Normal
+Journal mode: Wal
+Total time: 167.31s
+File size (MiB): 992.29
+Average write throughput: 59768.13 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag normal --journal-mode wal --count 10"
+	User time (seconds): 18.24
+	System time (seconds): 76.05
+	Percent of CPU this job got: 56%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:47.40
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 16012
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4974
+	Voluntary context switches: 368039
+	Involuntary context switches: 3817
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 301882632
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag normal --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 20000
+The type of schema: SingleTable
+Synchronous flag: Normal
+Journal mode: Off
+Total time: 66.84s
+File size (MiB): 992.36
+Average write throughput: 149614.30 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag normal --journal-mode off --count 10"
+	User time (seconds): 10.52
+	System time (seconds): 25.16
+	Percent of CPU this job got: 53%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:06.92
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 16276
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4759
+	Voluntary context switches: 252939
+	Involuntary context switches: 1361
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 101089672
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag off --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 20000
+The type of schema: SingleTable
+Synchronous flag: Off
+Journal mode: Wal
+Total time: 77.95s
+File size (MiB): 992.44
+Average write throughput: 128281.28 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag off --journal-mode wal --count 10"
+	User time (seconds): 18.02
+	System time (seconds): 59.86
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:18.04
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 16300
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4915
+	Voluntary context switches: 9487
+	Involuntary context switches: 2133
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 103347104
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag off --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 20000
+The type of schema: SingleTable
+Synchronous flag: Off
+Journal mode: Off
+Total time: 24.15s
+File size (MiB): 992.06
+Average write throughput: 414021.99 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema single-table --synchronous-flag off --journal-mode off --count 10"
+	User time (seconds): 10.25
+	System time (seconds): 13.81
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:24.22
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 15832
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4757
+	Voluntary context switches: 9364
+	Involuntary context switches: 390
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 2657120
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for type_schema in "${TYPE_SCHEMAS[@]}"
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 20000
+The type of schema: MappingAndDataTables
+Synchronous flag: Normal
+Journal mode: Wal
+Total time: 98.66s
+File size (MiB): 293.11
+Average write throughput: 101356.31 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode wal --count 10"
+	User time (seconds): 16.92
+	System time (seconds): 37.32
+	Percent of CPU this job got: 54%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:38.74
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 16848
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3568
+	Voluntary context switches: 316749
+	Involuntary context switches: 1958
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 162225384
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 20000
+The type of schema: MappingAndDataTables
+Synchronous flag: Normal
+Journal mode: Off
+Total time: 46.95s
+File size (MiB): 293.11
+Average write throughput: 213010.67 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag normal --journal-mode off --count 10"
+	User time (seconds): 12.96
+	System time (seconds): 14.10
+	Percent of CPU this job got: 57%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:46.98
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 16724
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3446
+	Voluntary context switches: 258853
+	Involuntary context switches: 1075
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 54833520
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 20000
+The type of schema: MappingAndDataTables
+Synchronous flag: Off
+Journal mode: Wal
+Total time: 44.37s
+File size (MiB): 293.11
+Average write throughput: 225387.20 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode wal --count 10"
+	User time (seconds): 16.11
+	System time (seconds): 28.19
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:44.41
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 16648
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3525
+	Voluntary context switches: 16955
+	Involuntary context switches: 1215
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 55255936
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 20000
+The type of schema: MappingAndDataTables
+Synchronous flag: Off
+Journal mode: Off
+Total time: 20.64s
+File size (MiB): 293.10
+Average write throughput: 484606.05 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema mapping-and-data-tables --synchronous-flag off --journal-mode off --count 10"
+	User time (seconds): 12.82
+	System time (seconds): 7.83
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:20.66
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 16492
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 3448
+	Voluntary context switches: 16662
+	Involuntary context switches: 351
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 1616456
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for type_schema in "${TYPE_SCHEMAS[@]}"
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag normal --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 20000
+The type of schema: Fts5Table
+Synchronous flag: Normal
+Journal mode: Wal
+Total time: 50.90s
+File size (MiB): 1107.07
+Average write throughput: 196461.05 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag normal --journal-mode wal --count 10"
+	User time (seconds): 36.89
+	System time (seconds): 3.97
+	Percent of CPU this job got: 80%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:50.96
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 21232
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4698
+	Voluntary context switches: 55558
+	Involuntary context switches: 953
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 17676736
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag normal --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 20000
+The type of schema: Fts5Table
+Synchronous flag: Normal
+Journal mode: Off
+Total time: 46.48s
+File size (MiB): 1107.25
+Average write throughput: 215136.79 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag normal --journal-mode off --count 10"
+	User time (seconds): 36.06
+	System time (seconds): 1.64
+	Percent of CPU this job got: 80%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:46.56
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 21032
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4642
+	Voluntary context switches: 57755
+	Involuntary context switches: 760
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 7566152
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for synchronous_flag in "${SYNCHRONOUS_FLAGS[@]}"
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag off --journal-mode wal --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 20000
+The type of schema: Fts5Table
+Synchronous flag: Off
+Journal mode: Wal
+Total time: 39.82s
+File size (MiB): 1108.68
+Average write throughput: 251142.90 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag off --journal-mode wal --count 10"
+	User time (seconds): 36.49
+	System time (seconds): 3.36
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:39.91
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 21220
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4713
+	Voluntary context switches: 9230
+	Involuntary context switches: 844
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 5291192
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
++ for journal_mode in "${JOURNAL_MODES[@]}"
++ /usr/bin/time -pv ./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag off --journal-mode off --count 10
+Insert benchmark results:
+Records inserted: 10M
+Batch size: 10000
+Unique tag values: 20000
+The type of schema: Fts5Table
+Synchronous flag: Off
+Journal mode: Off
+Total time: 37.48s
+File size (MiB): 1107.73
+Average write throughput: 266837.96 records/sec
+	Command being timed: "./target/release/simple-sqlite-bench-rs --batch-size 10000 --unique-tag-values 20000 --type-schema fts5-table --synchronous-flag off --journal-mode off --count 10"
+	User time (seconds): 36.25
+	System time (seconds): 1.30
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:37.55
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 20708
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4644
+	Voluntary context switches: 9231
+	Involuntary context switches: 642
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 2339656
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
