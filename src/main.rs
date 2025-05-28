@@ -2,8 +2,9 @@ mod errors;
 
 use crate::errors::AppResult;
 use clap::Parser;
+use log::LevelFilter;
 use sqlx::{
-    ConnectOptions, Connection,
+    ConnectOptions, Connection, QueryBuilder, Sqlite, Transaction,
     sqlite::{SqliteConnectOptions, SqliteJournalMode, SqliteSynchronous},
 };
 use std::fs::{exists, remove_file};
@@ -14,7 +15,7 @@ use uuid::Uuid;
 
 #[derive(Debug)]
 struct Row {
-    tag_valie: String,
+    tag_value: String,
     block_id: i16,
     offset: i32,
 }
@@ -48,11 +49,78 @@ fn remove_file_if_exists(path: &str) -> AppResult<()> {
 
 #[tokio::main]
 async fn main() -> AppResult<()> {
+    env_logger::builder().filter_level(LevelFilter::Info).init();
     let args = Args::parse();
 
     clean_up().expect("Failed to clean up database");
 
     run(args).await?;
+
+    Ok(())
+}
+
+async fn insert_batch(batch: &[Row], tx: &mut Transaction<'_, Sqlite>) -> AppResult<()> {
+    let conn = tx.deref_mut();
+    // ------------------------------------------------------------------
+    // 1) make sure the temp table exists (run once per connection)
+    // ------------------------------------------------------------------
+    sqlx::query(
+        r#"
+        CREATE TEMP TABLE IF NOT EXISTS temp_batch
+        ( tagvalue TEXT NOT NULL
+        , block_id INTEGER NOT NULL
+        , offset   INTEGER NOT NULL
+        );
+        "#,
+    )
+    .execute(&mut *conn)
+    .await?;
+
+    // ------------------------------------------------------------------
+    // 2) clear previous contents
+    // ------------------------------------------------------------------
+    sqlx::query("DELETE FROM temp_batch;")
+        .execute(&mut *conn)
+        .await?;
+
+    // ------------------------------------------------------------------
+    // 3) bulk-insert the incoming rows
+    //    QueryBuilder expands the VALUES list and binds for us
+    // ------------------------------------------------------------------
+    let mut qb = QueryBuilder::<Sqlite>::new("INSERT INTO temp_batch(tagvalue, block_id, offset) ");
+    qb.push_values(batch, |mut q, row| {
+        q.push_bind(&row.tag_value)
+            .push_bind(row.block_id)
+            .push_bind(row.offset);
+    });
+    qb.build().execute(&mut *conn).await?;
+
+    // ------------------------------------------------------------------
+    // 4) UPSERT names into tag_mapping
+    // ------------------------------------------------------------------
+    sqlx::query(
+        r#"
+        INSERT OR IGNORE INTO tag_mapping(tagvalue)
+        SELECT tagvalue
+        FROM   temp_batch;
+        "#,
+    )
+    .execute(&mut *conn)
+    .await?;
+
+    // ------------------------------------------------------------------
+    // 5) finally insert rows into tag_data
+    // ------------------------------------------------------------------
+    sqlx::query(
+        r#"
+        INSERT INTO tag_data(tag_id, block_id, offset)
+        SELECT tm.id, tb.block_id, tb.offset
+        FROM   temp_batch AS tb
+        JOIN   tag_mapping AS tm USING(tagvalue);
+        "#,
+    )
+    .execute(conn)
+    .await?;
 
     Ok(())
 }
@@ -66,22 +134,33 @@ async fn run(args: Args) -> AppResult<()> {
         .connect()
         .await?;
 
-    // Create table
     sqlx::query(
         r#"
-        CREATE TABLE IF NOT EXISTS tag_data (
-            tagvalue TEXT NOT NULL,
-            block_id INTEGER NOT NULL,
-            offset INTEGER NOT NULL
+        CREATE TABLE IF NOT EXISTS tag_mapping (
+            id INTEGER PRIMARY KEY,
+            tagvalue TEXT UNIQUE NOT NULL
         )"#,
     )
     .execute(&mut conn)
     .await?;
 
-    // Create index
+    // Create table
     sqlx::query(
         r#"
-        CREATE INDEX IF NOT EXISTS idx_tagvalue ON tag_data (tagvalue)"#,
+        CREATE TABLE IF NOT EXISTS tag_data (
+            tag_id INTEGER NOT NULL,
+            block_id INTEGER NOT NULL,
+            offset INTEGER NOT NULL,
+            FOREIGN KEY(tag_id) REFERENCES tag_mapping(id)
+        )"#,
+    )
+    .execute(&mut conn)
+    .await?;
+
+    // Create optimized index on integer column
+    sqlx::query(
+        r#"
+        CREATE INDEX IF NOT EXISTS idx_tag_id ON tag_data (tag_id)"#,
     )
     .execute(&mut conn)
     .await?;
@@ -108,32 +187,16 @@ async fn run(args: Args) -> AppResult<()> {
         for i in start..end {
             let unique_value = &unique_values[i % unique_values.len()];
             let row = Row {
-                tag_valie: unique_value.clone(),
+                tag_value: unique_value.clone(),
                 block_id: (i % 32768) as i16,
                 offset: i as i32,
             };
             rows.push(row);
         }
 
-        // Build SQL query
-        let placeholders = vec!["(?, ?, ?)".to_string(); current_batch_size];
-        let sql = format!(
-            "INSERT INTO tag_data (tagvalue, block_id, offset) VALUES {}",
-            placeholders.join(", ")
-        );
-
-        // Prepare query
-        let mut query = sqlx::query(&sql);
-        for row in rows {
-            query = query
-                .bind(row.tag_valie)
-                .bind(row.block_id)
-                .bind(row.offset);
-        }
-
         // Execute in transaction
         let mut tx = conn.begin().await?;
-        query.execute(tx.deref_mut()).await?;
+        insert_batch(&rows, &mut tx).await?;
         tx.commit().await?;
     }
 

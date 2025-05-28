@@ -5,6 +5,7 @@
 * OS: Ubuntu 25.04, 6.14.0-15-generic
 * CPU: AMD Ryzen 9 9950X 16-Core Processor
 * Disk: NVMe SSD, Samsung SSD 970 EVO Plus 2TB
+* rustc: 1.86.0
 
 ## 10 Million rows, Synchronous flag is Normal, Journal mode is WAL
 
